@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/comments/CommentsWebPart.js",
+      "manifest": "./src/webparts/comments/CommentsWebPart.manifest.json",
+      "outputPath": "./dist/comments.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "commentsStrings": "webparts/comments/loc/{locale}.js"
+  }
+}

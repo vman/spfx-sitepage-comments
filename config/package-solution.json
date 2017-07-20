@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "spfx-sitepage-comments-client-side-solution",
+    "id": "78b2257c-f06c-42fe-8dc6-1d4037dc078f",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-sitepage-comments.sppkg"
+  }
+}
