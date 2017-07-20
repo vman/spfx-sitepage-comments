@@ -6,7 +6,7 @@ import {
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-import { SPHttpClient } from '@microsoft/sp-http';
+import { SPHttpClient, ISPHttpClientOptions } from '@microsoft/sp-http';
 
 import styles from './Comments.module.scss';
 import * as strings from 'commentsStrings';
@@ -33,8 +33,8 @@ export default class CommentsWebPart extends BaseClientSideWebPart<ICommentsWebP
         </div>
       </div>`;
 
-    this.getSitePageComments();
-
+    //this.getSitePageComments();
+    this.setSitePageComments();
   }
 
   private async getSitePageComments() {
@@ -53,6 +53,28 @@ export default class CommentsWebPart extends BaseClientSideWebPart<ICommentsWebP
     });
 
   }
+
+  private async setSitePageComments() {
+
+    const currentWebUrl: string = this.context.pageContext.web.serverRelativeUrl;
+
+    const spOpts: ISPHttpClientOptions = {
+      body: `{ "text": "from spfx code" }`
+    };
+
+    const response = await this.context.spHttpClient.post(`${currentWebUrl}/_api/web/lists('1aaec881-7f5b-4f82-b1f7-9e02cc116098')/GetItemById(3)/Comments`,
+      SPHttpClient.configurations.v1,
+      spOpts);
+
+    const responseJSON = await response.json();
+
+    const comment: Comment = responseJSON;
+
+    console.log(comment.text);
+    console.log(comment.replyCount);
+
+  }
+
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
