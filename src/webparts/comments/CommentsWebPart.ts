@@ -33,12 +33,11 @@ export default class CommentsWebPart extends BaseClientSideWebPart<ICommentsWebP
         </div>
       </div>`;
 
-    //this.getSitePageComments();
-    this.setSitePageComments();
+    this.getSitePageComments();
+    //this.postSitePageComment();
   }
 
   private async getSitePageComments() {
-
     const currentWebUrl: string = this.context.pageContext.web.serverRelativeUrl;
 
     const response = await this.context.spHttpClient.get(`${currentWebUrl}/_api/web/lists('1aaec881-7f5b-4f82-b1f7-9e02cc116098')/GetItemById(3)/Comments`, SPHttpClient.configurations.v1);
@@ -51,10 +50,9 @@ export default class CommentsWebPart extends BaseClientSideWebPart<ICommentsWebP
       console.log(comment.text);
       console.log(comment.replyCount);
     });
-
   }
 
-  private async setSitePageComments() {
+  private async postSitePageComment() {
 
     const currentWebUrl: string = this.context.pageContext.web.serverRelativeUrl;
 
